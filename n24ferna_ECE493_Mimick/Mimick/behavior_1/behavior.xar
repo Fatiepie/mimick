@@ -15,7 +15,7 @@
       <BehaviorLayer name="behavior_layer1">
         <BehaviorKeyframe name="keyframe1" index="1">
           <Diagram>
-            <Box name="Animated Say" id="2" localization="8" tooltip="Say some text with animations. The text can be localized." x="407" y="569">
+            <Box name="Animated Say" id="2" localization="8" tooltip="Say some text with animations. The text can be localized." x="805" y="273">
               <bitmap>media/images/box/interaction/say.png</bitmap>
               <script language="4">
                 <content>
@@ -73,7 +73,7 @@ class MyClass(GeneratedClass):
               <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when Box behavior is finished." id="4" />
               <Parameter name="Voice shaping (%)" inherits_from_parent="1" content_type="1" value="100" default_value="100" min="50" max="150" tooltip='Used to modify at runtime the voice feature (tone, speed). In a slighty&#x0A;different way than pitch and speed, it gives a kind of &quot;gender or age&#x0A;modification&quot; effect.&#x0A;&#x0A;For instance, a quite good male derivation of female voice can be&#x0A;obtained setting this parameter to 78%.&#x0A;&#x0A;Note: For a better effect, you can compensate this parameter with the&#x0A;speed parameter. For example, if you want to decrease by 20% the voice&#x0A;shaping, you will have to increase by 20% the speed to keep a constant&#x0A;average speed.' id="5" />
               <Parameter name="Speed (%)" inherits_from_parent="1" content_type="1" value="100" default_value="100" min="50" max="200" tooltip="Changes the speed of the voice.&#x0A;&#x0A;Note: For a better effect, you can compensate this parameter with the voice&#x0A;shaping parameter. For example, if you want to increase by 20% the speed, you&#x0A;will have to decrease by 20% the voice shaping to keep a constant average&#x0A;speed." id="6" />
-              <Parameter name="Text" inherits_from_parent="0" content_type="5" value="Hello, My name is NAO and welcome to the experiment. Please have a seat!" default_value="" tooltip="The text you want to say. Don&apos;t forget to translate it!" id="7" />
+              <Parameter name="Text" inherits_from_parent="0" content_type="5" value="Hello, my name is NAO. Its great to see you today. Please have a seat!" default_value="" tooltip="The text you want to say. Don&apos;t forget to translate it!" id="7" />
               <Parameter name="Speaking movement mode" inherits_from_parent="0" content_type="3" value="contextual" default_value="contextual" custom_choice="0" tooltip="Change the body language mode during the speech.&#x0A;disabled: The robot will only play the animations given by the user through the animation parameter.&#x0A;random: During time the robot has no animation to play, he will launch random neutral animations.&#x0A;contextual: During time the robot has no animation to play, he will try to launch a new one accordingly to the saying text. Every time the robot can&apos;t find a contextual animation he will launch a random neutral animation." id="8">
                 <Choice value="disabled" />
                 <Choice value="random" />
@@ -82,174 +82,26 @@ class MyClass(GeneratedClass):
               <Parameter name="Animation" inherits_from_parent="0" content_type="3" value="Stand/Gestures/Hey_2" default_value="" custom_choice="0" tooltip="The animation to play" id="9" />
               <Resource name="Speech" type="Lock" timeout="0" />
             </Box>
-            <Box name="Face Tracker" id="5" localization="-1" tooltip="This box makes the robot track a face with different modes." x="127" y="378">
-              <bitmap>media/images/box/interaction/target_face.png</bitmap>
+            <Box name="Nodding and dialog" id="3" localization="8" tooltip="This box is empty (contains a single motion layer with no motor position&#x0A;defined in it) and should be used to create any animation you would like." x="1108" y="155">
+              <bitmap>media/images/box/movement/animation_mode.png</bitmap>
               <script language="4">
                 <content>
-                  <![CDATA[import time
-
-class MyClass(GeneratedClass):
-    def __init__(self):
-        GeneratedClass.__init__(self)
-        self.targetName = "Face"
-        self.distanceX = 0.0
-        self.distanceY = 0.0
-        self.angleWz = 0.0
-        self.thresholdX = 0.0
-        self.thresholdY = 0.0
-        self.thresholdWz = 0.0
-        self.subscribeDone = False
-        self.effector = "None"
-        self.isRunning = False
-
-    def onLoad(self):
-        self.tracker = self.session().service( "ALTracker" )
-        self.memory = self.session().service("ALMemory")
-        self.BIND_PYTHON(self.getName(), "setParameter")
-        self.BIND_PYTHON(self.getName(), "onTargetLost")
-        self.BIND_PYTHON(self.getName(), "onTargetReached")
-        self.BIND_PYTHON(self.getName(), "onTargetChanged")
-        self.memory.subscribeToEvent("ALTracker/ActiveTargetChanged", self.getName(), "onTargetChanged")
-
-    def onUnload(self):
-        if self.subscribeDone:
-            self.memory.unsubscribeToEvent("ALTracker/TargetLost", self.getName())
-            self.memory.unsubscribeToEvent("ALTracker/TargetReached", self.getName())
-            self.subscribeDone = False
-
-        if self.isRunning:
-            self.tracker.setEffector("None")
-            self.tracker.stopTracker()
-            self.tracker.unregisterTarget(self.targetName)
-            self.isRunning = False
-
-    def onInput_onStart(self):
-        self.memory.subscribeToEvent("ALTracker/TargetLost", self.getName(), "onTargetLost")
-        self.memory.subscribeToEvent("ALTracker/TargetReached", self.getName(), "onTargetReached")
-        self.subscribeDone = True
-
-        mode = self.getParameter("Mode")
-        width = self.getParameter("Width (m)")
-        self.distanceX = self.getParameter("Distance X (m)")
-        self.thresholdX = self.getParameter("Threshold X (m)")
-        self.distanceY = self.getParameter("Distance Y (m)")
-        self.thresholdY = self.getParameter("Threshold Y (m)")
-        self.angleWz = self.getParameter("Theta (rad)")
-        self.thresholdWz = self.getParameter("Threshold Theta (rad)")
-        self.effector = self.getParameter("Effector")
-
-        self.tracker.setEffector(self.effector)
-
-        self.tracker.registerTarget(self.targetName, width)
-        self.tracker.setRelativePosition([-self.distanceX, self.distanceY, self.angleWz,
-                                           self.thresholdX, self.thresholdY, self.thresholdWz])
-        self.tracker.setMode(mode)
-
-        self.tracker.track(self.targetName) #Start tracker
-        self.isRunning = True
-
-    def onInput_onStop(self):
-        self.onStopped()
-        self.onUnload()
-
-    def setParameter(self, parameterName, newValue):
-        GeneratedClass.setParameter(self, parameterName, newValue)
-        if (parameterName == "Mode"):
-            self.tracker.setMode(newValue)
-            return
-
-        if (parameterName == "Width (m)"):
-            self.tracker.registerTarget(self.targetName, newValue)
-            return
-
-        if (parameterName == "Distance X (m)"):
-            self.distanceX = newValue
-            self.tracker.setRelativePosition([-self.distanceX, self.distanceY, self.angleWz,
-                                               self.thresholdX, self.thresholdY, self.thresholdWz])
-            return
-
-        if (parameterName == "Distance Y (m)"):
-            self.distanceY = newValue
-            self.tracker.setRelativePosition([-self.distanceX, self.distanceY, self.angleWz,
-                                               self.thresholdX, self.thresholdY, self.thresholdWz])
-            return
-
-        if (parameterName == "Theta (rad)"):
-            self.angleWz = newValue
-            self.tracker.setRelativePosition([-self.distanceX, self.distanceY, self.angleWz,
-                                               self.thresholdX, self.thresholdY, self.thresholdWz])
-            return
-
-        if (parameterName == "Threshold X (m)"):
-            self.thresholdX = newValue
-            self.tracker.setRelativePosition([-self.distanceX, self.distanceY, self.angleWz,
-                                               self.thresholdX, self.thresholdY, self.thresholdWz])
-            return
-
-        if (parameterName == "Threshold Y (m)"):
-            self.thresholdY = newValue
-            self.tracker.setRelativePosition([-self.distanceX, self.distanceY, self.angleWz,
-                                               self.thresholdX, self.thresholdY, self.thresholdWz])
-            return
-
-        if (parameterName == "Threshold Theta (rad)"):
-            self.thresholdWz = newValue
-            self.tracker.setRelativePosition([-self.distanceX, self.distanceY, self.angleWz,
-                                               self.thresholdX, self.thresholdY, self.thresholdWz])
-            return
-
-        if(parameterName == "Effector"):
-            self.tracker.setEffector(newValue)
-            self.effector = newValue
-            return
-
-    def onTargetLost(self, key, value, message):
-        self.targetLost()
-
-    def onTargetReached(self, key, value, message):
-        self.targetReached()
-
-    def onTargetChanged(self, key, value, message):
-        if value == self.targetName and not self.subscribeDone:
-            self.memory.subscribeToEvent("ALTracker/TargetLost", self.getName(), "onTargetLost")
-            self.memory.subscribeToEvent("ALTracker/TargetReached", self.getName(), "onTargetReached")
-            self.subscribeDone = True
-        elif value != self.targetName and self.subscribeDone:
-            self.memory.unsubscribeToEvent("ALTracker/TargetLost", self.getName())
-            self.memory.unsubscribeToEvent("ALTracker/TargetReached", self.getName())
-            self.subscribeDone = False]]>
+                  <![CDATA[]]>
                 </content>
               </script>
               <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
               <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
               <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
               <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
-              <Output name="targetLost" type="1" type_size="1" nature="2" inner="0" tooltip="Signal sent when the target is lost." id="5" />
-              <Output name="targetReached" type="1" type_size="1" nature="2" inner="0" tooltip="Signal sent when the target is reached." id="6" />
-              <Parameter name="Mode" inherits_from_parent="0" content_type="3" value="Head" default_value="Head" custom_choice="0" tooltip="Set tracker mode" id="7">
-                <Choice value="Head" />
-                <Choice value="WholeBody" />
-                <Choice value="Move" />
-              </Parameter>
-              <Parameter name="Effector" inherits_from_parent="0" content_type="3" value="None" default_value="None" custom_choice="0" tooltip="Set effector to use for tracking. Head is always used." id="8">
-                <Choice value="None" />
-                <Choice value="Arms" />
-                <Choice value="LArm" />
-                <Choice value="RArm" />
-              </Parameter>
-              <Parameter name="Width (m)" inherits_from_parent="0" content_type="2" value="0.1" default_value="0.1" min="0.01" max="0.6" tooltip="Width of the face in meters" id="9" />
-              <Parameter name="Distance X (m)" inherits_from_parent="0" content_type="2" value="0.3" default_value="0.3" min="0.01" max="5" tooltip="Distance on X axis the robot will try to maintain from its target in move modes." id="10" />
-              <Parameter name="Threshold X (m)" inherits_from_parent="0" content_type="2" value="0.1" default_value="0.1" min="0.01" max="1" tooltip="Threshold above which the robot will move to track its target in move modes." id="11" />
-              <Parameter name="Distance Y (m)" inherits_from_parent="0" content_type="2" value="0" default_value="0" min="-5" max="5" tooltip="Distance on Y axis the robot will try to maintain from its target in move modes." id="12" />
-              <Parameter name="Threshold Y (m)" inherits_from_parent="0" content_type="2" value="0.1" default_value="0.1" min="0.01" max="1" tooltip="Threshold above which the robot will move to track its target in move modes." id="13" />
-              <Parameter name="Theta (rad)" inherits_from_parent="0" content_type="2" value="0" default_value="0" min="-3.14" max="3.14" tooltip="Wz angle of the vector robot-target the robot will try to maintain in move modes." id="14" />
-              <Parameter name="Threshold Theta (rad)" inherits_from_parent="0" content_type="2" value="0.3" default_value="0.3" min="0" max="3.14" tooltip="Threshold of the angle of the vector robot-target above which the robot will move to track its target in move modes." id="15" />
-            </Box>
-            <Box name="Animated Say (1)" id="1" localization="8" tooltip="Say some text with animations. The text can be localized." x="654" y="499">
-              <bitmap>media/images/box/interaction/say.png</bitmap>
-              <script language="4">
-                <content>
-                  <![CDATA[import time
+              <Timeline enable="1" fps="25" start_frame="1" end_frame="-1" size="2180">
+                <BehaviorLayer name="behavior_layer1">
+                  <BehaviorKeyframe name="keyframe1" index="1">
+                    <Diagram>
+                      <Box name="Animated Say" id="2" localization="8" tooltip="Say some text with animations. The text can be localized." x="396" y="125">
+                        <bitmap>media/images/box/interaction/say.png</bitmap>
+                        <script language="4">
+                          <content>
+                            <![CDATA[import time
 
 class MyClass(GeneratedClass):
     def __init__(self):
@@ -295,26 +147,111 @@ class MyClass(GeneratedClass):
 
     def onInput_onStop(self):
         self.onUnload()]]>
-                </content>
-              </script>
-              <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when Diagram is loaded." id="1" />
-              <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this Input." id="2" />
-              <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this Input." id="3" />
-              <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when Box behavior is finished." id="4" />
-              <Parameter name="Voice shaping (%)" inherits_from_parent="1" content_type="1" value="100" default_value="100" min="50" max="150" tooltip='Used to modify at runtime the voice feature (tone, speed). In a slighty&#x0A;different way than pitch and speed, it gives a kind of &quot;gender or age&#x0A;modification&quot; effect.&#x0A;&#x0A;For instance, a quite good male derivation of female voice can be&#x0A;obtained setting this parameter to 78%.&#x0A;&#x0A;Note: For a better effect, you can compensate this parameter with the&#x0A;speed parameter. For example, if you want to decrease by 20% the voice&#x0A;shaping, you will have to increase by 20% the speed to keep a constant&#x0A;average speed.' id="5" />
-              <Parameter name="Speed (%)" inherits_from_parent="1" content_type="1" value="100" default_value="100" min="50" max="200" tooltip="Changes the speed of the voice.&#x0A;&#x0A;Note: For a better effect, you can compensate this parameter with the voice&#x0A;shaping parameter. For example, if you want to increase by 20% the speed, you&#x0A;will have to decrease by 20% the voice shaping to keep a constant average&#x0A;speed." id="6" />
-              <Parameter name="Text" inherits_from_parent="0" content_type="5" value="Testing one two threee fourfuve and six" default_value="" tooltip="The text you want to say. Don&apos;t forget to translate it!" id="7" />
-              <Parameter name="Speaking movement mode" inherits_from_parent="0" content_type="3" value="contextual" default_value="contextual" custom_choice="0" tooltip="Change the body language mode during the speech.&#x0A;disabled: The robot will only play the animations given by the user through the animation parameter.&#x0A;random: During time the robot has no animation to play, he will launch random neutral animations.&#x0A;contextual: During time the robot has no animation to play, he will try to launch a new one accordingly to the saying text. Every time the robot can&apos;t find a contextual animation he will launch a random neutral animation." id="8">
-                <Choice value="disabled" />
-                <Choice value="random" />
-                <Choice value="contextual" />
-              </Parameter>
-              <Parameter name="Animation" inherits_from_parent="0" content_type="3" value="Stand/Gestures/Hey_2" default_value="" custom_choice="0" tooltip="The animation to play" id="9" />
-              <Resource name="Speech" type="Lock" timeout="0" />
+                          </content>
+                        </script>
+                        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when Diagram is loaded." id="1" />
+                        <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this Input." id="2" />
+                        <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this Input." id="3" />
+                        <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when Box behavior is finished." id="4" />
+                        <Parameter name="Voice shaping (%)" inherits_from_parent="1" content_type="1" value="100" default_value="100" min="50" max="150" tooltip='Used to modify at runtime the voice feature (tone, speed). In a slighty&#x0A;different way than pitch and speed, it gives a kind of &quot;gender or age&#x0A;modification&quot; effect.&#x0A;&#x0A;For instance, a quite good male derivation of female voice can be&#x0A;obtained setting this parameter to 78%.&#x0A;&#x0A;Note: For a better effect, you can compensate this parameter with the&#x0A;speed parameter. For example, if you want to decrease by 20% the voice&#x0A;shaping, you will have to increase by 20% the speed to keep a constant&#x0A;average speed.' id="5" />
+                        <Parameter name="Speed (%)" inherits_from_parent="1" content_type="1" value="100" default_value="100" min="50" max="200" tooltip="Changes the speed of the voice.&#x0A;&#x0A;Note: For a better effect, you can compensate this parameter with the voice&#x0A;shaping parameter. For example, if you want to increase by 20% the speed, you&#x0A;will have to decrease by 20% the voice shaping to keep a constant average&#x0A;speed." id="6" />
+                        <Parameter name="Text" inherits_from_parent="0" content_type="5" value="Ptolemy an Egyptian astronomer, mathematician, and geographer of Greek descent who flourished in Alexandria during the 2nd century CE. In several fields his writings represent the culminating achievement of Greco-Roman science, particularly his geocentric (Earth-centred) model of the universe now known as the Ptolemaic system.&#x0A;&#x0A;Ptolemy&#x0A;Ptolemy&#x0A;Ptolemy, as depicted in a copy (c. 1403/04) of the Bible historiale of Guiart des Moulins. Ptolemy was the most famous astronomer of Classical antiquity.&#x0A;Virtually nothing is known about Ptolemy’s life except what can be inferred from his writings. His first major astronomical work, the Almagest, was completed about 150 CE and contains reports of astronomical observations that Ptolemy had made over the preceding quarter of a century. The size and content of his subsequent literary production suggests that he lived until about 170 CE. " default_value="" tooltip="The text you want to say. Don&apos;t forget to translate it!" id="7" />
+                        <Parameter name="Speaking movement mode" inherits_from_parent="0" content_type="3" value="contextual" default_value="contextual" custom_choice="0" tooltip="Change the body language mode during the speech.&#x0A;disabled: The robot will only play the animations given by the user through the animation parameter.&#x0A;random: During time the robot has no animation to play, he will launch random neutral animations.&#x0A;contextual: During time the robot has no animation to play, he will try to launch a new one accordingly to the saying text. Every time the robot can&apos;t find a contextual animation he will launch a random neutral animation." id="8">
+                          <Choice value="disabled" />
+                          <Choice value="random" />
+                          <Choice value="contextual" />
+                        </Parameter>
+                        <Parameter name="Animation" inherits_from_parent="0" content_type="3" value="Stand/Gestures/Hey_2" default_value="" custom_choice="0" tooltip="The animation to play" id="9" />
+                        <Resource name="Speech" type="Lock" timeout="0" />
+                      </Box>
+                      <Link inputowner="0" indexofinput="4" outputowner="2" indexofoutput="4" />
+                      <Link inputowner="2" indexofinput="2" outputowner="0" indexofoutput="1" />
+                    </Diagram>
+                  </BehaviorKeyframe>
+                </BehaviorLayer>
+                <ActuatorList model="nao">
+                  <ActuatorCurve name="value" actuator="HeadPitch" mute="0" unit="0">
+                    <Key frame="51" value="1.66754" />
+                    <Key frame="54" value="13.2692" />
+                    <Key frame="57" value="23.8163" />
+                    <Key frame="60" value="15.2908" />
+                    <Key frame="503" value="14.5876" />
+                    <Key frame="610" value="1.66754" />
+                    <Key frame="613" value="13.2692" />
+                    <Key frame="616" value="23.8163" />
+                    <Key frame="619" value="15.2908" />
+                    <Key frame="711" value="1.66754" />
+                    <Key frame="714" value="13.2692" />
+                    <Key frame="717" value="23.8163" />
+                    <Key frame="720" value="15.2908" />
+                    <Key frame="757" value="-27.3367" />
+                    <Key frame="842" value="-26.4578" />
+                    <Key frame="936" value="14.5876" />
+                    <Key frame="952" value="1.66754" />
+                    <Key frame="955" value="13.2692" />
+                    <Key frame="958" value="23.8163" />
+                    <Key frame="961" value="15.2908" />
+                    <Key frame="1047" value="-26.4578" />
+                    <Key frame="1133" value="1.66754" />
+                    <Key frame="1136" value="13.2692" />
+                    <Key frame="1139" value="23.8163" />
+                    <Key frame="1142" value="15.2908" />
+                    <Key frame="1411" value="1.66754" />
+                    <Key frame="1414" value="13.2692" />
+                    <Key frame="1417" value="23.8163" />
+                    <Key frame="1420" value="15.2908" />
+                    <Key frame="1868" value="1.66754" />
+                    <Key frame="1871" value="13.2692" />
+                    <Key frame="1874" value="23.8163" />
+                    <Key frame="1877" value="15.2908" />
+                    <Key frame="2001" value="-27.3367" />
+                    <Key frame="2086" value="-26.4578" />
+                    <Key frame="2180" value="14.5876" />
+                  </ActuatorCurve>
+                  <ActuatorCurve name="value" actuator="HeadYaw" mute="0" unit="0">
+                    <Key frame="51" value="-2.37549" />
+                    <Key frame="54" value="-2.37549" />
+                    <Key frame="57" value="-2.37549" />
+                    <Key frame="60" value="-4.04543" />
+                    <Key frame="503" value="-35.3349" />
+                    <Key frame="610" value="-2.37549" />
+                    <Key frame="613" value="-2.37549" />
+                    <Key frame="616" value="-2.37549" />
+                    <Key frame="619" value="-4.04543" />
+                    <Key frame="711" value="-2.37549" />
+                    <Key frame="714" value="-2.37549" />
+                    <Key frame="717" value="-2.37549" />
+                    <Key frame="720" value="-4.04543" />
+                    <Key frame="757" value="43.2403" />
+                    <Key frame="842" value="17.8396" />
+                    <Key frame="936" value="-35.3349" />
+                    <Key frame="952" value="-2.37549" />
+                    <Key frame="955" value="-2.37549" />
+                    <Key frame="958" value="-2.37549" />
+                    <Key frame="961" value="-4.04543" />
+                    <Key frame="1047" value="17.8396" />
+                    <Key frame="1133" value="-2.37549" />
+                    <Key frame="1136" value="-2.37549" />
+                    <Key frame="1139" value="-2.37549" />
+                    <Key frame="1142" value="-4.04543" />
+                    <Key frame="1411" value="-2.37549" />
+                    <Key frame="1414" value="-2.37549" />
+                    <Key frame="1417" value="-2.37549" />
+                    <Key frame="1420" value="-4.04543" />
+                    <Key frame="1868" value="-2.37549" />
+                    <Key frame="1871" value="-2.37549" />
+                    <Key frame="1874" value="-2.37549" />
+                    <Key frame="1877" value="-4.04543" />
+                    <Key frame="2001" value="43.2403" />
+                    <Key frame="2086" value="17.8396" />
+                    <Key frame="2180" value="-35.3349" />
+                  </ActuatorCurve>
+                </ActuatorList>
+              </Timeline>
             </Box>
-            <Link inputowner="5" indexofinput="2" outputowner="0" indexofoutput="2" />
-            <Link inputowner="2" indexofinput="2" outputowner="5" indexofoutput="5" />
-            <Link inputowner="1" indexofinput="2" outputowner="2" indexofoutput="4" />
+            <Link inputowner="3" indexofinput="2" outputowner="2" indexofoutput="4" />
+            <Link inputowner="2" indexofinput="2" outputowner="0" indexofoutput="2" />
+            <Link inputowner="0" indexofinput="4" outputowner="3" indexofoutput="4" />
           </Diagram>
         </BehaviorKeyframe>
       </BehaviorLayer>
