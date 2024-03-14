@@ -78,10 +78,20 @@
             <translation type="obsolete">Today we will be talking about the great life, of Vincent Van Gogh!</translation>
         </message>
         <message>
-            <location filename="behavior_1/behavior.xar" line="0"/>
             <source>Oh? Awesome! So Basically,</source>
             <comment>Text</comment>
-            <translation type="unfinished">Oh? Awesome! So Basically,</translation>
+            <translation type="obsolete">Oh? Awesome! So Basically,</translation>
+        </message>
+        <message>
+            <location filename="../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../translations/behavior_1/behavior.xar" line="0"/>
+            <source></source>
+            <comment>Text</comment>
+            <translation></translation>
+        </message>
+        <message>
+            <source>Alright! Thank you so much for coming today! I hope you have a nice rest of your day!</source>
+            <comment>Text</comment>
+            <translation type="obsolete">Alright! Thank you so much for coming today! I hope you have a nice rest of your day!</translation>
         </message>
     </context>
     <context>
@@ -174,6 +184,74 @@
         </message>
     </context>
     <context>
+        <name>behavior_1/behavior.xar:/Choice (1)/Choice</name>
+        <message>
+            <source>no/no nao/disagree/I disagree</source>
+            <comment>SpeechReco negative</comment>
+            <translation type="obsolete">no/no nao/disagree/I disagree</translation>
+        </message>
+        <message>
+            <source>yes/yes nao/agree/I agree/of course</source>
+            <comment>SpeechReco positive</comment>
+            <translation type="obsolete">yes/yes nao/agree/I agree/of course</translation>
+        </message>
+        <message>
+            <source>help/help me/i don't know</source>
+            <comment>SpeechReco help</comment>
+            <translation type="obsolete">help/help me/i don't know</translation>
+        </message>
+        <message>
+            <source>exit/stop/quit</source>
+            <comment>SpeechReco exit</comment>
+            <translation type="obsolete">exit/stop/quit</translation>
+        </message>
+        <message>
+            <source>repeat/pardon/what/excuse me</source>
+            <comment>SpeechReco repeat</comment>
+            <translation type="obsolete">repeat/pardon/what/excuse me</translation>
+        </message>
+        <message>
+            <source>I understood %s. Is that correct?</source>
+            <comment>TTS confirmation</comment>
+            <translation type="obsolete">I understood %s. Is that correct?</translation>
+        </message>
+        <message>
+            <source>, / or </source>
+            <comment>TTS enumMarks</comment>
+            <translation type="obsolete">, / or </translation>
+        </message>
+        <message>
+            <source>No answer is really expected. /Your answer can be %s. /Your answer can be for example %s. /%s?</source>
+            <comment>TTS helpEnumChoices</comment>
+            <translation type="obsolete">No answer is really expected. /Your answer can be %s. /Your answer can be for example %s. /%s?</translation>
+        </message>
+        <message>
+            <source> you can ask me: %s. </source>
+            <comment>TTS helpEnumDefault</comment>
+            <translation type="obsolete"> you can ask me: %s. </translation>
+        </message>
+        <message>
+            <source>You can also use my tactile sensor to choose the answer./\Pau=600\ Press the front or the rear of my skull cap to go through all of the available answers. Press then the circle in the middle to validate your choice.</source>
+            <comment>TTS helpTactile</comment>
+            <translation type="obsolete">You can also use my tactile sensor to choose the answer./\Pau=600\ Press the front or the rear of my skull cap to go through all of the available answers. Press then the circle in the middle to validate your choice.</translation>
+        </message>
+        <message>
+            <source>I did not understand. </source>
+            <comment>TTS notUnderstood</comment>
+            <translation type="obsolete">I did not understand. </translation>
+        </message>
+        <message>
+            <source>No question has been defined, so I cannot repeat it. </source>
+            <comment>TTS noQuestion</comment>
+            <translation type="obsolete">No question has been defined, so I cannot repeat it. </translation>
+        </message>
+        <message>
+            <source>There is too much noise here! /Try to talk to me more distinctly. /I can't hear you very well. </source>
+            <comment>TTS notUnderstoodAnims</comment>
+            <translation type="obsolete">There is too much noise here! /Try to talk to me more distinctly. /I can't hear you very well. </translation>
+        </message>
+    </context>
+    <context>
         <name>behavior_1/behavior.xar:/Choice/Choice</name>
         <message>
             <location filename="behavior_1/behavior.xar" line="0"/>
@@ -252,6 +330,15 @@
             <source>There is too much noise here! /Try to talk to me more distinctly. /I can't hear you very well. </source>
             <comment>TTS notUnderstoodAnims</comment>
             <translation type="unfinished">There is too much noise here! /Try to talk to me more distinctly. /I can't hear you very well. </translation>
+        </message>
+    </context>
+    <context>
+        <name>behavior_1/behavior.xar:/Conclusion</name>
+        <message>
+            <location filename="behavior_1/behavior.xar" line="0"/>
+            <source>Hello</source>
+            <comment>Text</comment>
+            <translation type="unfinished">Hello</translation>
         </message>
     </context>
     <context>
@@ -359,10 +446,15 @@ Virtually nothing is known about Ptolemy’s life except what can be inferred fr
     <context>
         <name>behavior_1/behavior.xar:/Nodding and dialog/behavior_layer1/keyframe1/Lucas_Jake (1)</name>
         <message>
-            <location filename="behavior_1/behavior.xar" line="0"/>
             <source>Vincent van Gogh was a Dutch painter, generally considered the greatest after Rembrandt van Rijn, and one of the greatest of the Post-Impressionists. The striking colour, emphatic brushwork, and contoured forms of his work powerfully influenced the current of Expressionism in modern art. Van Gogh’s art became astoundingly popular after his death, especially in the late 20th century, when his work sold for record-breaking sums at auctions around the world and was featured in blockbuster touring exhibitions. In part because of his extensive published letters, van Gogh has also been mythologized in the popular imagination as the quintessential tortured artist. Van Gogh, the eldest of six children of a Protestant pastor, was born and reared in a small village in the Brabant region of the southern Netherlands. He was a quiet, self-contained youth, spending his free time wandering the countryside to observe nature. At 16 he was apprenticed to The Hague branch of the art dealers Goupil and Co., of which his uncle was a partner. Van Gogh worked hard and methodically but soon perceived the difficulty of self-training and the need to seek the guidance of more experienced artists. Late in 1881 he settled at The Hague to work with a Dutch landscape painter, Anton Mauve. He visited museums and met with other painters. Van Gogh thus extended his technical knowledge and experimented with oil paint in the summer of 1882. In 1883 the urge to be “alone with nature” and with peasants took him to Drenthe, an isolated part of the northern Netherlands frequented by Mauve and other Dutch artists, where he spent three months before returning home, which was then at Nuenen, another village in the Brabant. He remained at Nuenen during most of 1884 and 1885, and during these years his art grew bolder and more assured. He painted three types of subjects—still life, landscape, and figure—all interrelated by their reference to the daily life of peasants, to the hardships they endured, and to the countryside they cultivated. Émile Zola’s Germinal (1885), a novel about the coal-mining region of France, greatly impressed van Gogh, and sociological criticism is implicit in many of his pictures from this period—e.g., Weavers and The Potato Eaters. Eventually, however, he felt too isolated in Nuenen.</source>
             <comment>Text</comment>
-            <translation type="unfinished">Vincent van Gogh was a Dutch painter, generally considered the greatest after Rembrandt van Rijn, and one of the greatest of the Post-Impressionists. The striking colour, emphatic brushwork, and contoured forms of his work powerfully influenced the current of Expressionism in modern art. Van Gogh’s art became astoundingly popular after his death, especially in the late 20th century, when his work sold for record-breaking sums at auctions around the world and was featured in blockbuster touring exhibitions. In part because of his extensive published letters, van Gogh has also been mythologized in the popular imagination as the quintessential tortured artist. Van Gogh, the eldest of six children of a Protestant pastor, was born and reared in a small village in the Brabant region of the southern Netherlands. He was a quiet, self-contained youth, spending his free time wandering the countryside to observe nature. At 16 he was apprenticed to The Hague branch of the art dealers Goupil and Co., of which his uncle was a partner. Van Gogh worked hard and methodically but soon perceived the difficulty of self-training and the need to seek the guidance of more experienced artists. Late in 1881 he settled at The Hague to work with a Dutch landscape painter, Anton Mauve. He visited museums and met with other painters. Van Gogh thus extended his technical knowledge and experimented with oil paint in the summer of 1882. In 1883 the urge to be “alone with nature” and with peasants took him to Drenthe, an isolated part of the northern Netherlands frequented by Mauve and other Dutch artists, where he spent three months before returning home, which was then at Nuenen, another village in the Brabant. He remained at Nuenen during most of 1884 and 1885, and during these years his art grew bolder and more assured. He painted three types of subjects—still life, landscape, and figure—all interrelated by their reference to the daily life of peasants, to the hardships they endured, and to the countryside they cultivated. Émile Zola’s Germinal (1885), a novel about the coal-mining region of France, greatly impressed van Gogh, and sociological criticism is implicit in many of his pictures from this period—e.g., Weavers and The Potato Eaters. Eventually, however, he felt too isolated in Nuenen.</translation>
+            <translation type="obsolete">Vincent van Gogh was a Dutch painter, generally considered the greatest after Rembrandt van Rijn, and one of the greatest of the Post-Impressionists. The striking colour, emphatic brushwork, and contoured forms of his work powerfully influenced the current of Expressionism in modern art. Van Gogh’s art became astoundingly popular after his death, especially in the late 20th century, when his work sold for record-breaking sums at auctions around the world and was featured in blockbuster touring exhibitions. In part because of his extensive published letters, van Gogh has also been mythologized in the popular imagination as the quintessential tortured artist. Van Gogh, the eldest of six children of a Protestant pastor, was born and reared in a small village in the Brabant region of the southern Netherlands. He was a quiet, self-contained youth, spending his free time wandering the countryside to observe nature. At 16 he was apprenticed to The Hague branch of the art dealers Goupil and Co., of which his uncle was a partner. Van Gogh worked hard and methodically but soon perceived the difficulty of self-training and the need to seek the guidance of more experienced artists. Late in 1881 he settled at The Hague to work with a Dutch landscape painter, Anton Mauve. He visited museums and met with other painters. Van Gogh thus extended his technical knowledge and experimented with oil paint in the summer of 1882. In 1883 the urge to be “alone with nature” and with peasants took him to Drenthe, an isolated part of the northern Netherlands frequented by Mauve and other Dutch artists, where he spent three months before returning home, which was then at Nuenen, another village in the Brabant. He remained at Nuenen during most of 1884 and 1885, and during these years his art grew bolder and more assured. He painted three types of subjects—still life, landscape, and figure—all interrelated by their reference to the daily life of peasants, to the hardships they endured, and to the countryside they cultivated. Émile Zola’s Germinal (1885), a novel about the coal-mining region of France, greatly impressed van Gogh, and sociological criticism is implicit in many of his pictures from this period—e.g., Weavers and The Potato Eaters. Eventually, however, he felt too isolated in Nuenen.</translation>
+        </message>
+        <message>
+            <location filename="behavior_1/behavior.xar" line="0"/>
+            <source>Oh? Awesome! So Basically,  Vincent van Gogh was a Dutch painter, generally considered the greatest after Rembrandt van Rijn, and one of the greatest of the Post-Impressionists. The striking colour, emphatic brushwork, and contoured forms of his work powerfully influenced the current of Expressionism in modern art. Van Gogh’s art became astoundingly popular after his death, especially in the late 20th century, when his work sold for record-breaking sums at auctions around the world and was featured in blockbuster touring exhibitions. In part because of his extensive published letters, van Gogh has also been mythologized in the popular imagination as the quintessential tortured artist. Van Gogh, the eldest of six children of a Protestant pastor, was born and reared in a small village in the Brabant region of the southern Netherlands. He was a quiet, self-contained youth, spending his free time wandering the countryside to observe nature. At 16 he was apprenticed to The Hague branch of the art dealers Goupil and Co., of which his uncle was a partner. Van Gogh worked hard and methodically but soon perceived the difficulty of self-training and the need to seek the guidance of more experienced artists. Late in 1881 he settled at The Hague to work with a Dutch landscape painter, Anton Mauve. He visited museums and met with other painters. Van Gogh thus extended his technical knowledge and experimented with oil paint in the summer of 1882. In 1883 the urge to be “alone with nature” and with peasants took him to Drenthe, an isolated part of the northern Netherlands frequented by Mauve and other Dutch artists, where he spent three months before returning home, which was then at Nuenen, another village in the Brabant. He remained at Nuenen during most of 1884 and 1885, and during these years his art grew bolder and more assured. He painted three types of subjects—still life, landscape, and figure—all interrelated by their reference to the daily life of peasants, to the hardships they endured, and to the countryside they cultivated. Émile Zola’s Germinal (1885), a novel about the coal-mining region of France, greatly impressed van Gogh, and sociological criticism is implicit in many of his pictures from this period—e.g., Weavers and The Potato Eaters. Eventually, however, he felt too isolated in Nuenen.</source>
+            <comment>Text</comment>
+            <translation type="unfinished">Oh? Awesome! So Basically,  Vincent van Gogh was a Dutch painter, generally considered the greatest after Rembrandt van Rijn, and one of the greatest of the Post-Impressionists. The striking colour, emphatic brushwork, and contoured forms of his work powerfully influenced the current of Expressionism in modern art. Van Gogh’s art became astoundingly popular after his death, especially in the late 20th century, when his work sold for record-breaking sums at auctions around the world and was featured in blockbuster touring exhibitions. In part because of his extensive published letters, van Gogh has also been mythologized in the popular imagination as the quintessential tortured artist. Van Gogh, the eldest of six children of a Protestant pastor, was born and reared in a small village in the Brabant region of the southern Netherlands. He was a quiet, self-contained youth, spending his free time wandering the countryside to observe nature. At 16 he was apprenticed to The Hague branch of the art dealers Goupil and Co., of which his uncle was a partner. Van Gogh worked hard and methodically but soon perceived the difficulty of self-training and the need to seek the guidance of more experienced artists. Late in 1881 he settled at The Hague to work with a Dutch landscape painter, Anton Mauve. He visited museums and met with other painters. Van Gogh thus extended his technical knowledge and experimented with oil paint in the summer of 1882. In 1883 the urge to be “alone with nature” and with peasants took him to Drenthe, an isolated part of the northern Netherlands frequented by Mauve and other Dutch artists, where he spent three months before returning home, which was then at Nuenen, another village in the Brabant. He remained at Nuenen during most of 1884 and 1885, and during these years his art grew bolder and more assured. He painted three types of subjects—still life, landscape, and figure—all interrelated by their reference to the daily life of peasants, to the hardships they endured, and to the countryside they cultivated. Émile Zola’s Germinal (1885), a novel about the coal-mining region of France, greatly impressed van Gogh, and sociological criticism is implicit in many of his pictures from this period—e.g., Weavers and The Potato Eaters. Eventually, however, he felt too isolated in Nuenen.</translation>
         </message>
     </context>
     <context>
